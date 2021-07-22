@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+    font-family: "ＭＳ Ｐ明朝";
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  html, body,
+  ul, ol, li,
+  h1, h2, h3, h4, h5, h6, p, div {
+    margin: 0;
+    padding: 0;
+  }
+  
+  @media (max-width: 480px) {
+    .header {
+      width: 430px;
+    }
+    .header-list li {
+      padding: 40px 10px 0 0;
+      font-size: 13px;
+    }
+    .main {
+      width: 350px;
+      height: 500px
+    }
+    footer {
+      width: 350px;
+    }
+    .footer-list li {
+      font-size: 15px;
+    }
+    .copy-container {
+      padding-top: 0;
+      font-size: 30px;
+    }
+    .section-title {
+      padding-top: 0px;
+    }
+    .contents-item img{
+      width: 200px;
+      height: 100px;
+      padding-top: 20px;
+    }
+  }
+  
+  @media (min-width: 767px) {
+    .main {
+      height: 1000px;
+    }
+    .header-list li {
+      padding: 33px 60px;
+      font-size: 20px;
+    }
+    .contents-item img{
+      width: 400px;
+      height: 300px;
+      padding-top: 30px;
+    }
+    .copy-container {
+      padding-top: 40px;
+      font-size: 40px;
+    }
+    .section-title {
+      padding-top: 20px;
+    }
+    .footer-list li {
+      font-size: 20px;
+    }
+  }
+  
+  .header {
+    background-color: #AA0000;
+    color: black;
+    height: 90px;
+    font-weight: bold;
+    z-index: 10;
+  }
+  
+  .header-logo {
+    float: left;
+    font-size: 36px;
+    padding: 10px 40px 0 30px;
+  }
+  
+  .header-list li {
+    float: left;
+  }
+  
+  .header-list a {
+    color: black;
+    background-color: rgba(170,0,0,0.7);
+    transition: all 0.5s;
+  }
+  
+  .header-list:hover {
+    background-color: rgba(170,0,0,0.5);
+  }
+  
+  .main {
+    padding: 50px 40px;
+    background-image: url(../images/wood.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .copy-container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .contents {
+    height: 500px;
+    margin-top: 100px;
+  }
+  
+  .section-title {
+    border-bottom: 2px solid #dee7ec;
+    font-size: 28px;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .section-title p {
+    font-size: 15px;
+  }
+  
+  footer {
+    background-color: #AA0000;
+    color: black;
+    height: 120px;
+    padding: 40px;
+    font-family: "ＭＳ Ｐ明朝";
+    font-weight: bold;
+  }
+  
+  .footer-logo {
+    float: left;
+    font-size: 30px
+  
+  }
+  
+  .footer-list {
+    float: right;
+  }
+  
+  .footer-list li {
+    padding: 10px;
+  }
+  
+  .footer-list a {
+    color: black;
+    background-color: rgba(170,0,0,0.7);
+    transition: all 0.5s;
+  }
+  
+  .logo {
+    width: 140px;
+    margin-top: 10px;
+  }
+  
