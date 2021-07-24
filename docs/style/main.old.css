@@ -1,0 +1,181 @@
+body {
+    margin: 0;
+    font-family: "ＭＳ Ｐ明朝";
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  li {
+    list-style: none;
+  }
+  
+  html, body,
+  ul, ol, li,
+  h1, h2, h3, h4, h5, h6, p, div {
+    margin: 0;
+    padding: 0;
+  }
+  
+  @media (max-width: 485px) {
+    .header {
+      width: 430px;
+    }
+    .header-list li {
+      padding: 40px 10px 0 0;
+      font-size: 13px;
+    }
+    .main {
+      width: 430px;
+      height: 500px
+    }
+    footer {
+      width: 350px;
+    }
+    .footer-list li {
+      font-size: 15px;
+    }
+    .restaurant-name {
+  
+      padding: 100px 0 30px 0;
+      font-size: 30px;
+    }
+    .togo-form {
+      padding: 30px 0 40px 0;
+    }
+  }
+  
+  @media (min-width: 767px) {
+    .header-list li {
+      padding: 33px 60px;
+      font-size: 20px;
+    }
+    .main {
+      weight: 796px;
+      height: 900px;
+    }
+    .restaurant-name {
+      padding: 300px 0 30px 0;
+      font-size: 50px;
+    }
+    .footer-list li {
+      font-size: 20px;
+    }
+    .togo-form {
+      padding: 30px 0 60px 0;
+    }
+  }
+  
+  .header {
+    background-color: #AA0000;
+    color: black;
+    height: 90px;
+    font-weight: bold;
+    z-index: 10;
+  }
+  
+  .header-logo {
+    float: left;
+    padding: 10px 40px 0 30px;
+  }
+  
+  .header-list li {
+    float: left;
+  }
+  
+  .header-list a {
+    color: black;
+    background-color: rgba(170,0,0,0.7);
+    transition: all 0.5s;
+  }
+  
+  .header-list:hover {
+    background-color: rgba(170,0,0,0.5);
+  }
+  
+  .main {
+    background-image: url(../images/wood.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .copy-container {
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .restaurant-name {
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .togo-form {
+    padding: 30px 0 60px 0;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .btn-wrapper {
+    margin: 20px 0px;
+    text-align: center;
+  }
+  
+  .reserve {
+    background-color: white;
+    font-size: 40px;
+    padding: 8px 24px;
+    color: black;
+    display: inline-block;
+    opacity: 0.8;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 10px #c8c8c8;
+  }
+  
+  .reserve:hover {
+    opacity: 1;
+  }
+  
+  .reserve:active {
+    box-shadow: none;
+    position: relative;
+    top: 7px;
+  }
+  
+  footer {
+    background-color: #AA0000;
+    color: black;
+    height: 120px;
+    padding: 40px;
+    font-family: "ＭＳ Ｐ明朝";
+    font-weight: bold;
+  }
+  
+  .footer-logo {
+    float: left;
+    font-size: 30px
+  
+  }
+  
+  .footer-list {
+    float: right;
+  }
+  
+  .footer-list li {
+    padding: 10px;
+  }
+  
+  .footer-list a {
+    color: black;
+    background-color: rgba(170,0,0,0.7);
+    transition: all 0.5s;
+  }
+  
+  .logo {
+    width: 140px;
+    margin-top: 10px;
+  }
+  
