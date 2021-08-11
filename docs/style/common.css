@@ -7,7 +7,7 @@ body {
   /* font-family: source-han-sans-japanese, sans-serif; */
   font-family: source-han-serif-japanese, serif;
   font-size: 16px;
-  background-image: url(/public/images/dark-wood.jpg);
+  background-image: url(/images/dark-wood.jpg);
   background-repeat: repeat-y;
   background-size: cover;
   color: white;
@@ -50,7 +50,7 @@ body {
   margin-top: 52px;
 }
 .header-cover {
-  background-image: url(/public/images/top-header1.jpg);
+  background-image: url(/images/top-header1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
