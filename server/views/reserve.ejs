@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <%- include("./common/head", {title: "予約"}) %>
+    <link rel="stylesheet" href="/style/reserve.css" />
+    <style>
+      .theme--light.v-application {
+        background: transparent;
+        color: inherit;
+      }
+      .v-application {
+        font-family: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./common/header", {active:"reserve"}) %>
+
+    <div id="app">
+      <v-app dark>
+        <v-main dark>
+          <v-container fluid dark>
+            <div class="main">
+              <div class="container">
+                <h3 class="section-title">予約</h3>
+                <div class="contents-item1">
+                  <p>やき鳥　りき亭　オンライン予約</p>
+                </div>
+                <!-- <div class="orange darken-3 pa-5">
+                    文字: <span id="test1">最初の文字</span>
+                    <div onclick="clicked1()">ここを押す</div>
+                </div>
+                <span id="test2">最初の文字</span> -->
+                <v-card>
+                  <!-- 以下予約ステップ -->
+                  <v-card-text>
+                    <v-stepper v-model="e1">
+                      <!-- ステップ内のヘッダー -->
+                      <v-stepper-header>
+                        <v-stepper-step :complete="e1 > 1" step="1">
+                          お客様情報を入力
+                        </v-stepper-step>
+
+                        <v-divider></v-divider>
+
+                        <v-stepper-step :complete="e1 > 2" step="2">
+                          ご来店日時を入力
+                        </v-stepper-step>
+
+                        <v-divider></v-divider>
+
+                        <v-stepper-step step="3">
+                          メニューを選択
+                        </v-stepper-step>
+                      </v-stepper-header>
+                      <!-- ステップ1：お客様情報入力欄 -->
+                      <v-stepper-items>
+                        <v-stepper-content step="1">
+                          <v-card class="mb-12" height="200px">
+                            <p style = "font-size: 15px;">以下お客様の情報をご入力ください。</p>
+                            <v-text-field
+                              v-model="inputNameText"
+                              outlined
+                              hide-details="auto"
+                              label="(必須)お名前"
+                              placeholder="山田　太郎"
+                            ></v-text-field>
+                            <v-text-field
+                              v-model="inputNameText"
+                              outlined
+                              hide-details="auto"
+                              label="(必須)電話番号"
+                              placeholder="090-****-****"
+                              class="mt-3"
+                            ></v-text-field>
+                          </v-card>
+                          <!-- 以下進むボタン -->
+                          <v-btn color="primary" @click="e1 = 2">
+                            次に進む
+                          </v-btn>
+                        </v-stepper-content>
+                        <!-- ステップ2：来店日時選択 -->
+                        <v-stepper-content step="2">
+                          <v-card class="mb-12" height="400px">
+                            <v-row justify="center">
+                              <v-date-picker
+                                v-model="date"
+                                :allowed-dates="allowedDates"
+                                class="mt-4"
+                                min="2021-08-01"
+                                max="2023-12-31"
+                              ></v-date-picker>
+                            </v-row>
+                          </v-card>
+                          <!-- 以下各ボタン -->
+                          <v-btn color="primary" @click="e1 = 3">
+                            次に進む
+                          </v-btn>
+
+                          <v-btn text @click="e1 = 1"> キャンセル </v-btn>
+                        </v-stepper-content>
+                        <!-- ステップ3：メニュー選択 -->
+                        <v-stepper-content step="3">
+                        <!-- メニューのセレクト -->
+                          <v-card
+                            class="mb-12"
+                            height="400px"
+                          > <p style = "font-size: 20px; padding-left: 15px;">メニューの一覧</p>
+                            <v-container fluid>
+                                <v-row align="center">
+                                <v-col
+                                    class="d-flex"
+                                    cols="12"
+                                    sm="6"
+                                >
+                                    <v-select
+                                    :items="items_menu"
+                                    label="メニューをお選び下さい。"
+                                    ></v-select>
+                                </v-col>
+                            </v-row>
+                            </v-container>
+                        <!-- 数量のセレクト -->
+                            <p style = "font-size: 20px; padding-left: 15px;">数量</p>
+                            <v-container fluid>
+                                <v-row align="center">
+                                <v-col
+                                    class="d-flex"
+                                    cols="12"
+                                    sm="6"
+                                >
+                                    <v-select
+                                    :items="items_numbers"
+                                    label="数量をお選び下さい。"
+                                    ></v-select>
+                                </v-col>
+                            </v-row>
+                            </v-container>
+                        </v-card>
+                          <!-- 以下各ボタン -->
+                          <v-btn color="primary" @click="sendButtonClicked()">
+                            完了
+                          </v-btn>
+
+                          <v-btn text @click="e1 = 2"> キャンセル </v-btn>
+                        </v-stepper-content>
+                      </v-stepper-items>
+                    </v-stepper>
+
+                    <div>
+                      {{ inputNameText }}
+                    </div>
+
+                    <!-- <div class="text-center mt-3">
+                      <v-btn color="primary" @click="sendButtonClicked()"
+                        >予約する</v-btn
+                      >
+                    </div> -->
+                  </v-card-text>
+                </v-card>
+              </div>
+            </div>
+          </v-container>
+        </v-main>
+      </v-app>
+    </div>
+    <footer>
+      <div class="footer-logo"></div>
+    </footer>
+    <div id="fb-root"></div>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v11.0"
+      nonce="WGPn0m2J"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+          // function clicked1(){
+          //     var elem = document.getElementById('test1')
+          //     elem.innerText = "変更後の文字"
+          //     var elem2 = document.getElementById('test2')
+          //     elem2.innerText = "変更後の文字"
+          //     // alert("押された" + elem.innerText)
+          // }
+          new Vue({
+            el: "#app",
+            vuetify: new Vuetify(),
+            // 予約ステップのスクリプト
+            data() {
+              return {
+                e1: 1,
+            // カレンダーのスクリプト
+                date: '2021-09-01',
+            // メニュー選択のスクリプト
+                items_numbers: ['1人前', '2人前', '3人前', '4人前', '5人前', '6人前', '7人前', '8人前', '9人前', '10人前'],
+                items_menu: ['かわ', 'きも', 'ずり', 'しんぞう', 'なんこつ', '玉ひも', 'せぎみ', 'ねぎみ', 'つくね', 'せせり'],
+              };
+            },
+
+            methods: {
+                //カレンダーのメソッド（定休日以外選択可）
+                allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
+              sendButtonClicked() {
+                this.inputNameText = "こちらの内容でお間違いないでしょうか";
+              },
+            },
+          });
+    </script>
+  </body>
+</html>

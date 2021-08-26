@@ -1,35 +1,35 @@
+const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const app = express();
 const port = process.env.PORT || 3000;
-app.get("/test", (req, res) => {
-  let a = Date.now() / 1000;
-  let seconds = Math.floor(a);
-  res.send("Hello World!" + seconds);
-});
-app.get("/test2", (req, res) => {
-  let now = new Date();
-  let nowText =
-    now.getFullYear() +
-    "年" +
-    (now.getMonth() + 1) +
-    "月" +
-    now.getDate() +
-    "日" +
-    now.getHours() +
-    "時" +
-    now.getMinutes() +
-    "分" +
-    now.getSeconds() +
-    "秒";
-  console.log("time");
-  res.send("Ok" + nowText);
-});
-// app.get('/', (req, res, next) =>{
-//     res.redirect('/public')
-// })
+
+app.set("views", path.resolve(__dirname, "./views"));
+app.set("view engine", "ejs");
+
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
 app.use("/", express.static(path.resolve(__dirname, "../docs")));
 
+app.get("/test",(req,res,next) => {
+  res.render("index.ejs");
+})
+app.get("/test/menu",(req,res,next) => {
+  res.render("menu.ejs");
+})
+app.get("/test/reserve",(req,res,next) => {
+  res.render("reserve.ejs");
+})
+app.use((req,res,next) => {
+  next(createError(404));
+})
+app.use((err,req,res,next) => {
+  res.send(`エラーです。${err.message}`);
+})
 app.listen(port, () => {
   console.log(`Server started! Access to http://localhost:${port}`);
 });

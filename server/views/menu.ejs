@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <%- include("./common/head", {title:"メニュー"}) %>
+    <link rel="stylesheet" href="/style/menu.css" />
+  </head>
+  <body>
+    <%- include("./common/header", {active:"menu"}) %>
+    <div class="main">
+      <div class="container">
+        <h3 class="section-title">メニュー</h3>
+        <div class="contents-item1"></div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-logo"></div>
+    </footer>
+    <div id="fb-root"></div>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v11.0"
+      nonce="WGPn0m2J"
+    ></script>
+  </body>
+</html>

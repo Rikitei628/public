@@ -1,0 +1,16 @@
+<div class="header">
+  <div class="header-logo">
+    <img class="logo" src="/images/logo.jpg" />
+  </div>
+  <% const ACTIVE_KEY = "header-menu-item-active"; %>
+  <!--  -->
+  <% const indexClass = active == "index"?ACTIVE_KEY:""; %>
+  <!--  -->
+  <% const menuClass = active == "menu"?ACTIVE_KEY:""; %>
+  <!--  -->
+  <% const reserveClass = active == "reserve"?ACTIVE_KEY:""; %>
+  <!--  -->
+  <a href="/test" class="header-menu-item <%= indexClass %>">トップ</a>
+  <a href="/test/menu" class="header-menu-item <%= menuClass %>">メニュー</a>
+  <a href="/test/reserve" class="header-menu-item <%= reserveClass %>">予約</a>
+</div>
