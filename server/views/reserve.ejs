@@ -28,7 +28,7 @@
               <div class="container">
                 <h3 class="section-title">予約</h3>
                 <div class="contents-item1">
-                  <p>やき鳥　りき亭　オンライン予約</p>
+                  <p>やき鳥　りき亭　オンライン予約{{e1}}</p>
                 </div>
                 <!-- <div class="orange darken-3 pa-5">
                     文字: <span id="test1">最初の文字</span>
@@ -61,7 +61,9 @@
                       <v-stepper-items>
                         <v-stepper-content step="1">
                           <v-card class="mb-12" height="200px">
-                            <p style = "font-size: 15px;">以下お客様の情報をご入力ください。</p>
+                            <p style="font-size: 15px">
+                              以下お客様の情報をご入力ください。
+                            </p>
                             <v-text-field
                               v-model="inputNameText"
                               outlined
@@ -70,7 +72,7 @@
                               placeholder="山田　太郎"
                             ></v-text-field>
                             <v-text-field
-                              v-model="inputNameText"
+                              v-model="inputTellText"
                               outlined
                               hide-details="auto"
                               label="(必須)電話番号"
@@ -79,7 +81,7 @@
                             ></v-text-field>
                           </v-card>
                           <!-- 以下進むボタン -->
-                          <v-btn color="primary" @click="e1 = 2">
+                          <v-btn color="primary" @click= "step1Next()">
                             次に進む
                           </v-btn>
                         </v-stepper-content>
@@ -105,42 +107,36 @@
                         </v-stepper-content>
                         <!-- ステップ3：メニュー選択 -->
                         <v-stepper-content step="3">
-                        <!-- メニューのセレクト -->
-                          <v-card
-                            class="mb-12"
-                            height="400px"
-                          > <p style = "font-size: 20px; padding-left: 15px;">メニューの一覧</p>
+                          <!-- メニューのセレクト -->
+                          <v-card class="mb-12" height="400px">
+                            <p style="font-size: 20px; padding-left: 15px">
+                              メニューの一覧
+                            </p>
                             <v-container fluid>
-                                <v-row align="center">
-                                <v-col
-                                    class="d-flex"
-                                    cols="12"
-                                    sm="6"
-                                >
-                                    <v-select
+                              <v-row align="center">
+                                <v-col class="d-flex" cols="12" sm="6">
+                                  <v-select
                                     :items="items_menu"
                                     label="メニューをお選び下さい。"
-                                    ></v-select>
+                                  ></v-select>
                                 </v-col>
-                            </v-row>
+                              </v-row>
                             </v-container>
-                        <!-- 数量のセレクト -->
-                            <p style = "font-size: 20px; padding-left: 15px;">数量</p>
+                            <!-- 数量のセレクト -->
+                            <p style="font-size: 20px; padding-left: 15px">
+                              数量
+                            </p>
                             <v-container fluid>
-                                <v-row align="center">
-                                <v-col
-                                    class="d-flex"
-                                    cols="12"
-                                    sm="6"
-                                >
-                                    <v-select
+                              <v-row align="center">
+                                <v-col class="d-flex" cols="12" sm="6">
+                                  <v-select
                                     :items="items_numbers"
                                     label="数量をお選び下さい。"
-                                    ></v-select>
+                                  ></v-select>
                                 </v-col>
-                            </v-row>
+                              </v-row>
                             </v-container>
-                        </v-card>
+                          </v-card>
                           <!-- 以下各ボタン -->
                           <v-btn color="primary" @click="sendButtonClicked()">
                             完了
@@ -151,9 +147,9 @@
                       </v-stepper-items>
                     </v-stepper>
 
-                    <div>
+                    <!-- <div>
                       {{ inputNameText }}
-                    </div>
+                    </div> -->
 
                     <!-- <div class="text-center mt-3">
                       <v-btn color="primary" @click="sendButtonClicked()"
@@ -168,9 +164,7 @@
         </v-main>
       </v-app>
     </div>
-    <footer>
-      <div class="footer-logo"></div>
-    </footer>
+    <%- include("./common/footer") %>
     <div id="fb-root"></div>
     <script
       async
@@ -182,36 +176,89 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script>
-          // function clicked1(){
-          //     var elem = document.getElementById('test1')
-          //     elem.innerText = "変更後の文字"
-          //     var elem2 = document.getElementById('test2')
-          //     elem2.innerText = "変更後の文字"
-          //     // alert("押された" + elem.innerText)
-          // }
-          new Vue({
-            el: "#app",
-            vuetify: new Vuetify(),
-            // 予約ステップのスクリプト
-            data() {
-              return {
-                e1: 1,
+      // function sendButtonClicked(){
+      //     var elem = document.getElementById('test1')
+      //     elem.innerText = "変更後の文字"
+      //     var elem2 = document.getElementById('test2')
+      //     elem2.innerText = "変更後の文字"
+      //     // alert("押された" + elem.innerText)
+      // }
+      new Vue({
+        el: "#app",
+        vuetify: new Vuetify(),
+        // 予約ステップのスクリプト
+        data() {
+          return {
+            e1: 1,
+            inputNameText: "",
+            inputTellText: "",
             // カレンダーのスクリプト
-                date: '2021-09-01',
+            date: "2021-09-01",
             // メニュー選択のスクリプト
-                items_numbers: ['1人前', '2人前', '3人前', '4人前', '5人前', '6人前', '7人前', '8人前', '9人前', '10人前'],
-                items_menu: ['かわ', 'きも', 'ずり', 'しんぞう', 'なんこつ', '玉ひも', 'せぎみ', 'ねぎみ', 'つくね', 'せせり'],
-              };
-            },
+            items_numbers: [
+              "1人前",
+              "2人前",
+              "3人前",
+              "4人前",
+              "5人前",
+              "6人前",
+              "7人前",
+              "8人前",
+              "9人前",
+              "10人前",
+            ],
+            items_menu: [
+              "かわ",
+              "きも",
+              "ずり",
+              "しんぞう",
+              "なんこつ",
+              "玉ひも",
+              "せぎみ",
+              "ねぎみ",
+              "つくね",
+              "せせり",
+            ],
+          };
+        },
 
-            methods: {
-                //カレンダーのメソッド（定休日以外選択可）
-                allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
-              sendButtonClicked() {
-                this.inputNameText = "こちらの内容でお間違いないでしょうか";
-              },
-            },
-          });
+        methods: {
+          //カレンダーのメソッド（定休日以外選択可）
+          // allowedDates: val => parseInt(val.split('-')[2], 10) % 2 === 0,
+          allowedDates(val) {
+            const dates = new Date(val);
+            const result = dates.getDay();
+            if (result == 2) {
+              return false;
+            } else {
+              return true;
+            }
+            // console.log(result);
+            // let result = parseInt(val.split('-')[2], 10) % 2 === 0;
+            // return result
+          },
+          sendButtonClicked() {
+            // = "こちらの内容でお間違いないでしょうか";
+            // console.log("呼ばれた。");
+            // alert("こちらの内容でお間違いないでしょうか?");
+            console.log("呼ばれた。");
+            const result = window.confirm("こちらの内容でお間違いないでしょうか?");
+            console.log(result);
+            if(result == false){
+              return
+            }
+            console.log("処理を続行する");
+          },
+          step1Next() {
+            console.log("呼ばれた。");
+            if(this.inputNameText == "" || this.inputTellText == ""){
+              alert("必須項目をご入力ください。");
+            }else{
+              this.e1 = 2;
+            }
+          }
+        },
+      });
     </script>
   </body>
 </html>

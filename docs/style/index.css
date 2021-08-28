@@ -1,4 +1,6 @@
 .contents-item2 p {
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 .google-map {
   border: none;
