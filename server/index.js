@@ -14,6 +14,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use("/", express.static(path.resolve(__dirname, "../docs")));
+app.post("/api/reservation", (req,res,next)=>{
+  console.log(req.body)
+  res.json({
+    // type: 'postDate',
+    // message: '過去の日付が選択されているため、予約できませんでした。',
+  })
+})
 
 app.get("/test",(req,res,next) => {
   res.render("index.ejs");
