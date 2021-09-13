@@ -170,7 +170,8 @@
                                         <tr>
                                           <th>メニュー名</th>
                                           <th>数量</th>
-                                          <th></th>
+                                          <th>金額</th>
+                                          <th>小計</th>
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -181,8 +182,11 @@
                                         </tr>
                                         <tr v-for="(menu,i) in menus" :key="i">
                                           <td>{{ menu.name }}</td>
-                                          <td>{{ menu.count }}</td>
-                                          <td></td>
+                                          <td>{{ menu.count }}人前</td>
+                                          <td>{{ menu.price }}円</td>
+                                          <td>
+                                            {{ menu.price * menu.count }}円
+                                          </td>
                                           <td>
                                             <v-btn
                                               @click="menus.splice(i,1)"
@@ -322,29 +326,18 @@
             ],
             menuSelect: "",
             numberSelect: "",
-            items_numbers: [
-              "1人前",
-              "2人前",
-              "3人前",
-              "4人前",
-              "5人前",
-              "6人前",
-              "7人前",
-              "8人前",
-              "9人前",
-              "10人前",
-            ],
+            items_numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             items_menu: [
-              "かわ",
-              "きも",
-              "ずり",
-              "しんぞう",
-              "なんこつ",
-              "玉ひも",
-              "せぎみ",
-              "ねぎみ",
-              "つくね",
-              "せせり",
+              { text: "かわ", value: { name: "かわ", price: 300 } },
+              { text: "きも", value: { name: "きも", price: 300 } },
+              { text: "ずり", value: { name: "ずり", price: 300 } },
+              { text: "しんぞう", value: { name: "しんぞう", price: 300 } },
+              { text: "なんこつ", value: { name: "なんこつ", price: 300 } },
+              { text: "玉ひも", value: { name: "玉ひも", price: 300 } },
+              { text: "せぎみ", value: { name: "せぎみ", price: 300 } },
+              { text: "ねぎみ", value: { name: "ねぎみ", price: 300 } },
+              { text: "つくね", value: { name: "つくね", price: 300 } },
+              { text: "せせり", value: { name: "せせり", price: 300 } },
             ],
             isOpenDialog: false,
           };
@@ -380,7 +373,8 @@
               if (!this.numberSelect)
                 throw new Error("数量が選択されていません。");
               this.menus.push({
-                name: this.menuSelect,
+                name: this.menuSelect.name,
+                price: this.menuSelect.price,
                 count: this.numberSelect,
               });
               this.menuSelect = "";
