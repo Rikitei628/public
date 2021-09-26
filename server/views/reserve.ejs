@@ -30,15 +30,11 @@
                 <div class="contents-item1">
                   <p>やき鳥　りき亭　オンライン予約</p>
                 </div>
-                <!-- <div class="orange darken-3 pa-5">
-                    文字: <span id="test1">最初の文字</span>
-                    <div onclick="clicked1()">ここを押す</div>
-                </div>
-                <span id="test2">最初の文字</span> -->
                 <v-card>
                   <!-- 以下予約ステップ -->
                   <v-card-text>
                     <v-stepper v-model="e1">
+                      
                       <!-- ステップ内のヘッダー -->
                       <v-stepper-header>
                         <v-stepper-step :complete="e1 > 1" step="1">
@@ -53,30 +49,37 @@
 
                         <v-divider></v-divider>
 
-                        <v-stepper-step step="3">
+                        <v-stepper-step :complete="e1 > 3" step="3">
                           メニューを選択
                         </v-stepper-step>
+
+                        <v-divider></v-divider>
+
+                        <v-stepper-step step="4"> 予約完了 </v-stepper-step>
                       </v-stepper-header>
+
                       <!-- ステップ1：お客様情報入力欄 -->
                       <v-stepper-items>
                         <v-stepper-content step="1">
-                          <v-card class="mb-12" height="200px" flat>
+                          <v-card class="mb-12" height="250px" flat>
                             <p style="font-size: 15px">
                               以下お客様の情報をご入力ください。
                             </p>
+                            <p style="font-weight: bold">記入例　山田　太郎</p>
                             <v-text-field
                               v-model="inputNameText"
                               outlined
                               hide-details="auto"
                               label="(必須)お名前"
-                              placeholder="山田　太郎"
                             ></v-text-field>
+                            <p style="font-weight: bold">
+                              記入例　000-0000-0000　(半角文字)
+                            </p>
                             <v-text-field
                               v-model="inputTellText"
                               outlined
                               hide-details="auto"
                               label="(必須)電話番号"
-                              placeholder="(半角)090-****-****"
                               class="mt-3"
                             ></v-text-field>
                           </v-card>
@@ -85,6 +88,7 @@
                             次に進む
                           </v-btn>
                         </v-stepper-content>
+
                         <!-- ステップ2：来店日時選択 -->
                         <v-stepper-content step="2">
                           <v-card class="mb-12" height="600px" flat>
@@ -127,6 +131,7 @@
 
                           <v-btn text @click="e1 = 1"> キャンセル </v-btn>
                         </v-stepper-content>
+
                         <!-- ステップ3：メニュー選択 -->
                         <v-stepper-content step="3">
                           <v-card class="mb-12" flat>
@@ -200,6 +205,8 @@
                                       </tbody>
                                     </template>
                                   </v-simple-table>
+                                  <p style="font-weight: bold">合計金額</p>
+                                  {{ totalPrice }}円
                                 </div>
                               </v-col>
                             </v-row>
@@ -232,6 +239,10 @@
                                         注文内容:
                                         {{ menusText }}
                                       </div>
+                                      <div class="pa-2">
+                                        合計金額:
+                                        {{ totalPrice }}円
+                                      </div>
                                     </v-card-text>
                                     <v-card-actions>
                                       <v-btn text @click="dialog.value = false"
@@ -240,7 +251,7 @@
                                       <v-spacer></v-spacer>
                                       <v-btn
                                         color="primary"
-                                        @click="sendReservation()"
+                                        @click="sendReservation(), dialog.value = false"
                                         >予約を確定</v-btn
                                       >
                                     </v-card-actions>
@@ -256,18 +267,34 @@
 
                           <v-btn text @click="e1 = 2"> キャンセル </v-btn>
                         </v-stepper-content>
+
+                        <!-- ステップ4　予約完了 -->
+                        <v-stepper-content step="4">
+                          <v-card class="mb-12" height="200px" flat>
+                            <p
+                              style="
+                                font-size: 20px;
+                                padding-left: 25px;
+                                padding-right: 25px;
+                                font-weight: bold;
+                              "
+                            >
+                              持ち帰り予約完了
+                            </p>
+                            <p style="padding-left: auto; padding-right: auto">
+                              ご予約が完了しました。
+                              <br />
+                              ご来店を心よりお待ちしております。
+                            </p>
+                            <p>
+                              お問い合わせ
+                              <br />
+                              TEL 078-579-2820
+                            </p>
+                          </v-card>
+                        </v-stepper-content>
                       </v-stepper-items>
                     </v-stepper>
-
-                    <!-- <div>
-                      {{ inputNameText }}
-                    </div> -->
-
-                    <!-- <div class="text-center mt-3">
-                      <v-btn color="primary" @click="sendButtonClicked()"
-                        >予約する</v-btn
-                      >
-                    </div> -->
                   </v-card-text>
                 </v-card>
               </div>
@@ -289,13 +316,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-      // function sendButtonClicked(){
-      //     var elem = document.getElementById('test1')
-      //     elem.innerText = "変更後の文字"
-      //     var elem2 = document.getElementById('test2')
-      //     elem2.innerText = "変更後の文字"
-      //     // alert("押された" + elem.innerText)
-      // }
       new Vue({
         el: "#app",
         vuetify: new Vuetify(),
@@ -347,6 +367,12 @@
             if (this.menus.length == 0) return "なし";
             return this.menus.map((v) => v.name + ":" + v.count).join(",");
           },
+          //合計金額の関数
+          totalPrice() {
+            return this.menus
+              .map((v) => v.price * v.count)
+              .reduce((v, sum) => v + sum, 0);
+          },
         },
         methods: {
           //カレンダーのメソッド（定休日以外選択可）
@@ -396,15 +422,6 @@
             } catch (err) {
               alert(err.message);
             }
-
-            // if (this.inputNameText == "" || this.inputTellText == "") {
-            //   alert("必須項目をご入力ください。");
-            //   // 電話番号が数字であるか判別
-            // } else if (isNaN(this.inputTellText) == false) {
-            //   this.e1 = 2;
-            // } else {
-            //   alert("半角数字を入力してください。");
-            // }
           },
           step2Next() {
             console.log(this.timeSelect);
@@ -425,6 +442,7 @@
                 time: this.timeSelect,
                 menu: this.menus,
               });
+              this.e1 = 4;
               console.log(data);
             } catch (err) {
               alert(err.message);
